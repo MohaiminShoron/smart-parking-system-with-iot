@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "873f5a7e-6eb4-4e59-b368-be69835250ce",
+		"name": "smart-parking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11095785"
+	},
+	"item": [
+		{
+			"name": "get parking list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/parking/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"parking",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"intent\": \"app\",\r\n    \"fullName\": \"Hello World!\", \r\n    \"email\": \"test@gmail.com\",\r\n    \"phone\": 111111111,\r\n    \"password\": \"12345678\"\r\n\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
