@@ -99,6 +99,102 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "get parking details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/parking/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"parking",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prebooking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"placeId\": 1,\r\n    \"bookingType\": \"VIP\",\r\n    \"carNumberPlate\": \"ABC123\",\r\n    \"userId\": \"user123\",\r\n    \"bookingDateTime\": \"2024-01-27T12:30:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/bookings/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"bookings",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "parking session end",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\": 9,\r\n    \"parkingOutTime\": \"2024-01-27T15:45:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/sessions/exit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"sessions",
+						"exit"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
