@@ -23,6 +23,11 @@ public class ParkingBookingService {
         this.parkingRepository = parkingRepository;
     }
 
+    public boolean checkVIPBooking(String licensePlateNumber) {
+        // Check if there is any booking with the given license plate number and VIP booking type
+        return parkingBookingRepository.existsByCarNumberPlateAndBookingType(licensePlateNumber, "VIP");
+    }
+
     public ParkingBookingResponse bookParkingSlot(ParkingBookingRequest bookingRequest) {
         ParkingBookingEntity bookingEntity = new ParkingBookingEntity();
         bookingEntity.setPlaceId(bookingRequest.getPlaceId());

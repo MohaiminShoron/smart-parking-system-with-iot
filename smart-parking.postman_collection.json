@@ -195,6 +195,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "check-vip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/smart-parking-0.0.1-SNAPSHOT/api/check-vip/check?licensePlateNumber=ABC123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"smart-parking-0.0.1-SNAPSHOT",
+						"api",
+						"check-vip",
+						"check"
+					],
+					"query": [
+						{
+							"key": "licensePlateNumber",
+							"value": "ABC123"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
