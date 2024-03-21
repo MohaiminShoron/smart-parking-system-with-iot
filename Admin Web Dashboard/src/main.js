@@ -1,39 +1,19 @@
-// Importing Vue and other necessary libraries
-import { createApp } from "vue";
-import App from "./App.vue";
-import axios from "axios";
-import store from "./store";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { createRouter, createWebHistory } from "vue-router";
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-//Importing Vue components
-import RegistrationPage from "./components/RegistrationPage.vue";
-import LoginPage from "./components/LoginPage.vue";
-import HomePage from "./components/HomePage.vue";
+import CoreuiVue from '@coreui/vue'
+import CIcon from '@coreui/icons-vue'
+import { iconsSet as icons } from '@/assets/icons'
+import DocsExample from '@/components/DocsExample'
 
-// Defining the routes for the application
-const routes = [
-  { path: "/register", component: RegistrationPage },
-  { path: "/login", component: LoginPage },
-  { path: "/", component: HomePage, meta: { requiresAuth: true } },
-];
+const app = createApp(App)
+app.use(store)
+app.use(router)
+app.use(CoreuiVue)
+app.provide('icons', icons)
+app.component('CIcon', CIcon)
+app.component('DocsExample', DocsExample)
 
-// Creating the router instance
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
-
-// Creating the Vue app instance
-const app = createApp(App);
-
-// Setting Axios as a global property for network requests
-app.config.globalProperties.$axios = axios;
-
-// Registering Vuex store and Vue Router with the app
-app.use(store);
-app.use(router);
-
-// Mounting the app to the DOM
-app.mount("#app");
+app.mount('#app')
