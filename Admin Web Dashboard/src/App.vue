@@ -1,21 +1,41 @@
 <template>
-  <div id="app">
-    <NavBar />
-    <router-view></router-view>
-  </div>
+  <router-view />
 </template>
-
 <script>
-import NavBar from './components/NavBar.vue'
+import { onBeforeMount } from 'vue'
+import { useStore } from 'vuex'
+import { useColorModes } from '@coreui/vue'
 
 export default {
-  components: {
-    NavBar
+  setup() {
+    const { isColorModeSet, setColorMode } = useColorModes(
+      'coreui-free-vue-admin-template-theme',
+    )
+    const store = useStore()
+
+    onBeforeMount(() => {
+      const urlParams = new URLSearchParams(window.location.href.split('?')[1])
+      const theme =
+        urlParams.get('theme') &&
+        urlParams.get('theme').match(/^[A-Za-z0-9\s]+/)[0]
+      if (theme) {
+        setColorMode(theme)
+        return
+      }
+
+      if (isColorModeSet()) {
+        return
+      }
+
+      setColorMode(store.state.theme)
+    })
   },
-  name: 'App',
-};
+}
 </script>
 
-<style>
-
+<style lang="scss">
+// Import Main styles for this application
+@import 'styles/style';
+// We use those styles to show code examples, you should remove them in your application.
+@import 'styles/examples';
 </style>
