@@ -75,13 +75,23 @@ public class AuthController {
 //        return ResponseEntity.status(401).body("Invalid credentials");
 //    }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(@RequestBody User loginRequest) {
+//        try {
+//            userService.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+//            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+//        } catch (UserAuthenticationException e) {
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+//        }
+//    }
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User loginRequest) {
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
         try {
-            userService.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
-            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+            User authenticatedUser = userService.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
+            return ResponseEntity.ok(authenticatedUser);
         } catch (UserAuthenticationException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 }
