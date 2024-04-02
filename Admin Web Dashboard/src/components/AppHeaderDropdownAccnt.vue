@@ -50,7 +50,7 @@
       <CDropdownItem>
         <CIcon icon="cil-shield-alt" /> Lock Account
       </CDropdownItem>
-      <CDropdownItem>
+      <CDropdownItem @click="logoutUser">
         <CIcon icon="cil-lock-locked" /> Logout
       </CDropdownItem>
     </CDropdownMenu>
@@ -67,5 +67,13 @@ export default {
       itemsCount: 42,
     }
   },
-}
+  methods: {
+    logoutUser() {
+      // Dispatch the logout action defined in Vuex store
+      this.$store.dispatch("logoutUser");
+      // Redirect to login page after logout
+      this.$router.push("/login");
+    },
+  },
+};
 </script>

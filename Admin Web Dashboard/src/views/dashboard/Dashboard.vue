@@ -35,7 +35,7 @@
               </CCol>
             </CRow>
             <CRow>
-              <MainChart :bookingData="bookingData" style="height: 300px; max-height: 300px; margin-top: 40px" />
+              <MainChart2 :userData="userData" style="height: 300px; max-height: 300px; margin-top: 40px" />
             </CRow>
           </CCardBody>
           
@@ -55,6 +55,7 @@ import avatar4 from '@/assets/images/avatars/4.jpg'
 import avatar5 from '@/assets/images/avatars/5.jpg'
 import avatar6 from '@/assets/images/avatars/6.jpg'
 import MainChart from './MainChart'
+import MainChart2 from './MainChart2.vue'
 import WidgetsStatsA from './../widgets/WidgetsStatsTypeA.vue'
 import WidgetsStatsD from './../widgets/WidgetsStatsTypeD.vue'
 import axios from 'axios'
@@ -64,16 +65,17 @@ export default {
   name: 'Dashboard',
   components: {
     MainChart,
+    MainChart2,
     WidgetsStatsA,
     WidgetsStatsD,
   },
   setup() {
 
-    const bookingData = ref({}); // This will hold our fetched data
+    const bookingData = ref({}); // This will hold fetched booking data
 
     const fetchBookingData = async () => {
       try {
-        const response = await axios.get('http://54.193.153.2:8080/v1/analytics/booking', {
+        const response = await axios.get('http://18.144.20.166:8080/v1/analytics/booking', {
           params: { year: 2024, filter: 'monthly' }
         });
         bookingData.value = response.data;
@@ -82,7 +84,26 @@ export default {
       }
     };
 
-    onMounted(fetchBookingData);
+    const userData = ref({}); // This will hold fetched user data
+
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://18.144.20.166:8080/v1/analytics/user', {
+          params: { year: 2024, filter: 'monthly' }
+        });
+        userData.value = response.data;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    onMounted(() => {
+      fetchBookingData()
+      fetchUserData()
+      
+    })
+
+
 
     const progressGroupExample1 = [
       { title: 'Monday', value1: 34, value2: 78 },
@@ -118,7 +139,7 @@ export default {
         },
         country: { name: 'USA', flag: 'cif-us' },
         usage: {
-          value: 50,
+          value: 100,
           period: 'Jun 11, 2023 - Jul 10, 2023',
           color: 'success',
         },
@@ -204,7 +225,8 @@ export default {
       progressGroupExample1,
       progressGroupExample2,
       progressGroupExample3,
-      bookingData
+      bookingData,
+      userData
     }
   },
 }

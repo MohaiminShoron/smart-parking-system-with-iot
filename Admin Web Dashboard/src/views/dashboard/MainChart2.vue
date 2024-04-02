@@ -1,5 +1,5 @@
 <template>
-  <CChart type="line" :data="chartData" :options="options" ref="mainChartRef" />
+  <CChart type="line" :data="chartData" :options="options" ref="mainChartRef2" />
 </template>
 
 <script>
@@ -8,17 +8,17 @@ import { CChart } from '@coreui/vue-chartjs'
 import { getStyle } from '@coreui/utils'
 
 export default {
-  name: 'MainChartExample',
+  name: 'MainChart2',
   components: {
     CChart,
   },
   props: {
-    bookingData: Object
+    userData: Object,
   },
   setup(props) {
-    const mainChartRef = ref(null)
-   
-    const options = ({
+    const mainChartRef2 = ref(null)
+
+    const options = {
       maintainAspectRatio: false,
       plugins: {
         legend: {
@@ -43,7 +43,7 @@ export default {
           grid: {
             color: getStyle('--cui-border-color-translucent'),
           },
-          max: 100,
+          max: 50,
           ticks: {
             color: getStyle('--cui-body-color'),
             maxTicksLimit: 5,
@@ -62,17 +62,17 @@ export default {
           hoverBorderWidth: 3,
         },
       },
-    })
+    }
 
-    const formatChartData = (bookingData) => {
-      const labels = Object.keys(bookingData);
-      const data = Object.values(bookingData);
+    const formatChartData = (userData) => {
+      const labels = Object.keys(userData)
+      const data = Object.values(userData)
 
       return {
         labels,
         datasets: [
           {
-            label: 'Bookings',
+            label: 'Active Users',
             backgroundColor: 'rgba(0,123,255,0.5)',
             borderColor: 'rgba(0,123,255,1)',
             pointHoverBackgroundColor: '#fff',
@@ -80,22 +80,26 @@ export default {
             data,
           },
         ],
-      };
-    };
+      }
+    }
 
-    const chartData = ref(formatChartData(props.bookingData));
+    const chartData = ref(formatChartData(props.userData))
 
-    watch(() => props.bookingData, (newData) => {
-      chartData.value = formatChartData(newData);
-    }, {
-      deep: true,
-      immediate: true,
-    });
+    watch(
+      () => props.userData,
+      (newData) => {
+        chartData.value = formatChartData(newData)
+      },
+      {
+        deep: true,
+        immediate: true,
+      },
+    )
 
     return {
-      mainChartRef,
+      mainChartRef2,
       options,
-      chartData
+      chartData,
     }
   },
 }

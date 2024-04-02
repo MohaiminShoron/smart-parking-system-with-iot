@@ -14,7 +14,7 @@
     "
   >
     <CSidebarHeader class="border-bottom">
-      <RouterLink custom to="/" v-slot="{ navigate }">
+      <RouterLink custom to="/dashboard" v-slot="{ navigate }">
         <div class="sidebar-brand" @click="navigate">
   Admin Portal
 </div>

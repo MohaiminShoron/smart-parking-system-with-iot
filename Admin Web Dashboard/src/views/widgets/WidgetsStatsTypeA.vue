@@ -59,7 +59,6 @@
         </template>
         <template #title>Parking Slot Utilization</template>
         <template #action>
-          <!-- Select dropdown to choose the location -->
           <select v-model="selectedLocation" class="form-select">
             <option value="MarketMall">Market Mall</option>
             <option value="ChinookMall">Chinook Mall</option>
@@ -196,86 +195,6 @@
       </CWidgetStatsA>
     </CCol>
 
-    <!-- <CCol :sm="6" :xl="4" :xxl="3">
-      <CWidgetStatsA color="danger">
-        <template #value
-          >2300
-        </template>
-        <template #title>Number of Active Users</template>
-        <template #action>
-        </template>
-        <template #chart>
-          <CChart
-            type="bar"
-            class="mt-3 mx-3"
-            style="height: 70px"
-            :data="{
-              labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-                'January',
-                'February',
-                'March',
-                'April',
-              ],
-              datasets: [
-                {
-                  label: 'My First dataset',
-                  backgroundColor: 'rgba(255,255,255,.2)',
-                  borderColor: 'rgba(255,255,255,.55)',
-                  data: [
-                    78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67,
-                    82,
-                  ],
-                  barPercentage: 0.6,
-                },
-              ],
-            }"
-            :options="{
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  display: false,
-                },
-              },
-              scales: {
-                x: {
-                  grid: {
-                    display: false,
-                    drawTicks: false,
-                  },
-                  ticks: {
-                    display: false,
-                  },
-                },
-                y: {
-                  border: {
-                    display: false,
-                  },
-                  grid: {
-                    display: false,
-                    drawTicks: false,
-                  },
-                  ticks: {
-                    display: false,
-                  },
-                },
-              },
-            }"
-          />
-        </template>
-      </CWidgetStatsA>
-    </CCol> -->
     <CCol :sm="6" :xl="4" :xxl="3">
       <CWidgetStatsA color="danger">
         <template #value>
@@ -283,7 +202,6 @@
           {{ numberOfUsers }}
         </template>
         <template #title>Number of Active Users</template>
-        <!-- date picker -->
         <template #action>
           <!-- Date Picker Input -->
           <CFormInput type="date" v-model="userSelectedDate" @change="fetchAllUserAnalytics" />
@@ -361,7 +279,7 @@ export default {
     // Function to fetch revenue for a single date
     const fetchRevenueForDate = async (date) => {
       try {
-        const response = await axios.get(`http://54.193.153.2:8080/v1/analytics/revenue`, {
+        const response = await axios.get(`http://18.144.20.166:8080/v1/analytics/revenue`, {
           params: { date },
         })
         // Update the revenue for the selected date
@@ -382,8 +300,8 @@ export default {
     // Function to fetch and update the revenue data for the chart
     const fetchAllRevenueData = async () => {
       const datesToFetch = [
-        // Fetching the last 10 days of data
-        ...Array.from({ length: 10 })
+        // Fetching the last 15 days of data
+        ...Array.from({ length: 15 })
           .map((_, i) => {
             let d = new Date()
             d.setDate(d.getDate() - i)
@@ -422,7 +340,7 @@ export default {
 
     const fetchParkingUtilization = async () => {
       try {
-        const response = await axios.get(`http://54.193.153.2:8080/v1/analytics/parking`, {
+        const response = await axios.get(`http://18.144.20.166:8080/v1/analytics/parking`, {
           params: { location: selectedLocation.value },
         })
         const utilization = response.data[selectedLocation.value].pct_utilization || '0.00'
@@ -456,7 +374,7 @@ export default {
 
     const fetchUsersForDate = async (date) => {
       try {
-        const response = await axios.get(`http://54.193.153.2:8080/v1/analytics/user`, {
+        const response = await axios.get(`http://18.144.20.166:8080/v1/analytics/user`, {
           params: { date },
         })
         // Checking if the fetched date is the selected date and update numberOfUsers
@@ -477,8 +395,8 @@ export default {
     // Function to fetch and update the users data for the chart
     const fetchAllUserAnalytics = async () => {
       const datesToFetch = [
-        // Fetching the last 10 days of data
-        ...Array.from({ length: 10 })
+        // Fetching the last 15 days of data
+        ...Array.from({ length: 15 })
           .map((_, i) => {
             let d = new Date()
             d.setDate(d.getDate() - i)
@@ -505,11 +423,11 @@ export default {
     const currentWeek = ref(0)
     const prevWeek = ref(0)
     const pctChange = ref('')
-    const bookingIcon = ref('cil-arrow-top') // Default icon
+    const bookingIcon = ref('cil-arrow-bottom') // Default icon
 
     const fetchBookingAnalytics = async () => {
       try {
-        const response = await axios.get('http://54.193.153.2:8080/v1/analytics/booking', {
+        const response = await axios.get('http://18.144.20.166:8080/v1/analytics/booking', {
           params: { filter: 'weekly' },
         })
         currentWeek.value = response.data.current_week
