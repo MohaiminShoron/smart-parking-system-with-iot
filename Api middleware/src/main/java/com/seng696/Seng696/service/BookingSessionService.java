@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingSessionService {
@@ -55,11 +57,16 @@ public class BookingSessionService {
         return hourlyRate * totalHoursStayed;
     }
 
+//    public List<ParkingBookingEntity> getUserBookingSessions(String userName) {
+//        // Retrieve parking bookings for the given user name
+//        return parkingBookingRepository.findByUserId(userName);
+//    }
+
     private BookingSessionResponse convertToResponse(ParkingBookingEntity bookingEntity, BookingSessionEntity sessionEntity) {
         BookingSessionResponse response = new BookingSessionResponse();
         response.setBookingId(sessionEntity.getBookingId());
-        response.setParkingLocationName("Your Parking Location Name"); // Set actual values
-        response.setParkingAddress("Your Parking Address"); // Set actual values
+        response.setParkingLocationName("Market Mall");
+        response.setParkingAddress("3625 Shaganappi Trail NW, Calgary, AB T3A 0E2");
         response.setBookingTime(sessionEntity.getBookingTime());
         response.setParkingInTime(bookingEntity.getParkingInTime());
         response.setParkingOutTime(sessionEntity.getParkingOutTime());
