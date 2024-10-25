@@ -1,1 +1,2 @@
-# smart-parking-system-with-iot
+# Smart-parking-system-with-IoT
+### “Smart Parking System with IoT” presents an innovative system that makes urban parking conditions much easier, interactive, and satisfactory for the user. It utilizes technologies such as automatic number plate recognition, NFC-based access, and a mobile application to perform the entire user journey in the system. The app handles user registration and authentication, reservation of the parking spot, and billing. A real-time web admin dashboard has also been developed to monitor the changes happening in the parking area currently operating under this smart parking system. The entire backend of the system including the databases is hosted in the AWS cloud platform.
